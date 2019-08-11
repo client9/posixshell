@@ -21,7 +21,7 @@ uname_os() {
     mingw*) os="windows" ;;
   esac
   
-  # Sun Solaris and derived OS (Illumos, Oracle Solaris) reports to very ancient SunOS via uname not what it actually is
+  # Sun Solaris and derived OS (Illumos, Oracle Solaris) reports to be the very ancient SunOS via uname not what it actually is
   if [[ "$os" == "sunos" ]]; then
     # GO 1.13 will introduce illumos as newly recognized GOOS
     grep -q illumos /etc/release
