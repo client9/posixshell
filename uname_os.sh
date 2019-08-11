@@ -22,12 +22,10 @@ uname_os() {
   esac
   
   # Sun Solaris and derived OS (Illumos, Oracle Solaris) reports to be the very ancient SunOS via uname not what it actually is
-  if [[ "$os" == "sunos" ]]; then
+  if [[ "$os" = "sunos" ]]; then
     # GO 1.13 will introduce illumos as newly recognized GOOS
-    grep -q illumos /etc/release
-    if [[ $? == 0 ]]; then
-      go version | grep -q "1.13"
-      if [[ $? == 0 ]]; then
+    if ! grep -q illumos /etc/release ; then
+      if go version | grep -q "1.13"; then
         os="illumos"
       else
         os="solaris"
