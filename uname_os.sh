@@ -27,7 +27,7 @@ uname_os() {
     grep -q illumos /etc/release
     if [[ $? == 0 ]]; then
       go version | grep -q "1.13"
-      if [[ $? == 0 ]]: then
+      if [[ $? == 0 ]]; then
         os="illumos"
       else
         os="solaris"
