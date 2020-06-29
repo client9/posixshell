@@ -23,6 +23,20 @@ uname_os() {
     win*) os="windows" ;; # for windows busybox and like # https://frippery.org/busybox/
   esac
 
+  # Sun Solaris and derived OS (Illumos, Oracle Solaris) reports to be the very ancient SunOS via uname not what it actually is
+  if [ "$os" = "sunos" ]; then
+    # GO 1.13 will introduce illumos as newly recognized GOOS
+    if ! grep -q illumos /etc/release; then
+      if go version | grep -q "1.13"; then
+        os="illumos"
+      else
+        os="solaris"
+      fi
+    else
+      os="solaris"
+    fi
+  fi
+
   # other fixups here
   echo "$os"
 }
